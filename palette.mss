@@ -48,13 +48,15 @@ Map { font-directory: url(./fonts); }
 @beach:             #F9F1B8;
 @park:              #CBDEAC;
 @cemetery:          #D6DED2;
-@wooded:            #C3D9AD;
+@wooded:            #CAE0A8; //#C3D9AD;
 @agriculture:       #F2E8B6;
+@airport:           #DFDBD4;
 
 @building:          #DFDBD4;
 @hospital:          rgb(229,198,195);
 @school:            #E8DDBD;
 @sports:            #B8E6B8;
+@restaurant:        #88513E;
 
 @residential:       @building * 0.999;
 @commercial:        @building * 0.99;
@@ -174,8 +176,11 @@ Map { font-directory: url(./fonts); }
 @other_text:        #888;
 @other_halo:        @place_halo;
 
-@locality_text:     #aaa;
+@locality_text:     #877C62;
 @locality_halo:     @land;
+
+@sublocality_text:  #908876;
+@sublocality_halo:  @land;
 
 /* Also used for other small places: hamlets, suburbs, localities */
 @village_text:      #888;
@@ -183,5 +188,11 @@ Map { font-directory: url(./fonts); }
 
 /* ****************************************************************** */
 
+/* ================================================================== */
+/* MARKER COLORS
+/* ================================================================== */
 
-
+@hospital_marker: red;
+@details17: grey;
+@financial_marker: darkgreen;
+@historical_marker: lightyellow;

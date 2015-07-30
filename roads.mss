@@ -95,29 +95,39 @@ come in as well.
   /* -- colors & styles -- */
   line-cap: round;
   line-join: round;
+  [FOW=@BRIDGE],
+  [FOW=@TUNNEL] {
+    line-cap: butt;
+  }
   line-color: @standard_case;
   [zoom>16] { line-color: darken(@standard_case, 15%); }
+  [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: @standard_case * 0.8; }
   [FRC=@EXPRESS_WAY] {
     line-color: @nh_line;
+    [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: @nh_line * 0.8; }
   }
   [FRC=@NATIONAL_HIGHWAY] {
     line-color: @sh_line;
+    [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: @sh_line * 0.8; }
   }
   [zoom>12]{
     [FRC=@SH_MAIN_ROAD] {
       line-color: @primary_case;
+      [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: @primary_case * 0.8; }
     }
     [FRC=@MINOR_ROAD] {
       line-color: @secondary_case;
+      [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: @secondary_case * 0.8; }
     }
-    [FRC=@LANE] {
+    /*[FRC=@LANE] {
       line-color: @standard_case;
     }
     [FRC=@SUB_LANE] {
       line-color: @standard_case;
-    }
+    }*/
   }
-
+  [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-dasharray: 3,3; }
+  
   /* -- widths -- */
   [zoom=11] {
     [FRC=@EXPRESS_WAY] { line-width: @rdz11_maj + 1; }
@@ -192,20 +202,26 @@ come in as well.
 #roadpolyline::inline[zoom>=11][zoom<=20] {
   /* -- colors & styles -- */
   line-color: @standard_fill;
+  [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-color: lighten(@standard_fill, 10%); }
   [FRC=@EXPRESS_WAY] {
     line-color: @nh_fill;
+    [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-color: lighten(@nh_fill, 15%); }
+    [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: darken(@nh_fill, 15%); }
   }
   [FRC=@NATIONAL_HIGHWAY] {
     line-color: @sh_fill;
+    [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-color: lighten(@sh_fill, 15%); }
+    [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: darken(@sh_fill, 10%); }
   }
   [FRC=@SH_MAIN_ROAD]{
     line-color: @primary_fill;
+    [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-color: lighten(@primary_fill, 15%); }
+    [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: darken(@primary_fill, 10%); }
   }
   [FRC=@MINOR_ROAD]{
     line-color: @secondary_fill;
-  }
-  [FRC=@LANE] {
-    line-color: @standard_fill;
+    [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-color: lighten(@secondary_fill, 15%); }
+    [FOW=@BRIDGE],[FOW=@FLYOVER] { line-color: darken(@secondary_fill, 10%); }
   }
 
   [FRC=@LANE],
@@ -222,6 +238,7 @@ come in as well.
   [FRC=@SUB_LANE] {
     line-join: round;
   }
+  [FOW=@TUNNEL],[FOW=@UNDERPASS] { line-cap: butt; }
 
   /* -- widths -- */
   [zoom=11] {
@@ -283,35 +300,29 @@ come in as well.
 }
 
 
+/* ---- Turning Circles --------------------------------------------- */
+#roadpolyline::outline[FOW=4][zoom>=14] {
+  marker-fill:@standard_fill;
+  marker-line-color:@standard_case;
+  marker-line-width:2;
+  marker-allow-overlap:true;
+}
+#roadpolyline::inline[FOW=4][zoom>=14] {
+  marker-fill:@standard_fill;
+  marker-line-width:0;
+  marker-line-opacity:0;
+  marker-allow-overlap:true;
+}
+#roadpolyline::outline[FOW=4],
+#roadpolyline::inline[FOW=4] {
+  [zoom=14] { marker-width:@rdz14_min * 1.1; }
+  [zoom=15] { marker-width:@rdz15_min * 1.1; }
+  [zoom=16] { marker-width:@rdz16_min * 1.1; }
+  [zoom=17] { marker-width:@rdz17_min * 1.1; }
+  [zoom>=18] { marker-width:@rdz18_min * 1.1; }
+}
 
-/*#roadpolyline[zoom>=9][zoom<=10] {
-  line-width: 0;
-  [FRC=@EXPRESS_WAY],
-  [FRC=@NATIONAL_HIGHWAY] {
-    line-color: @nh_line;
-  }
-  [FTR_CRY='NHY'] { line-color: darken(@nh_line, 50%); }
-  [FREEWAY=1] { line-color: @expressway_line; }
-  [FRC=@SH_MAIN_ROAD] { line-color: darken(@sh_line, 10%); }
-  [FRC=@MINOR_ROAD] { line-color: @secondary_line; }
-  [FRC=@LANE] { line-color: @standard_line; }
-  [zoom=9] {
-    [FRC=@EXPRESS_WAY], [FRC=@NATIONAL_HIGHWAY] { line-width: 1.8; }
-    [FRC=@SH_MAIN_ROAD] { line-width: 1.4; }
-  }
-  [zoom=10] {
-    [FRC=@EXPRESS_WAY], [FRC=@NATIONAL_HIGHWAY] { line-width: 2.2; }
-    [FRC=@SH_MAIN_ROAD] { line-width: 1.3; }
-    [FTR_CRY='RDB'] { line-width: 0; }
-  }
-}*/
-
-
-/*#roadpolyline[zoom>=7],
-#cityregion {
-  line-color:@primary_fill_city;
-}*/
-
+/* Rail lines */
 #railwaypolyline[zoom>=11] {
   line-color: @rail_line;
   line-dasharray: 1,1;
