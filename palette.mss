@@ -187,12 +187,3 @@ Map { font-directory: url(./fonts); }
 @village_halo:      @place_halo;
 
 /* ****************************************************************** */
-
-/* ================================================================== */
-/* MARKER COLORS
-/* ================================================================== */
-
-@hospital_marker: red;
-@details17: grey;
-@financial_marker: darkgreen;
-@historical_marker: lightyellow;
